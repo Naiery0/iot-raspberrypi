@@ -1,0 +1,31 @@
+<!-- templates/add.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Employee</title>
+</head>
+<body>
+    <h2>Employee Information</h2>
+    <form action="/submit" method="post">
+        <table>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td><input type="tel" name="phone"></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="email" name="email"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="submit"></td>
+            </tr>
+        </table>
+    </form>
+    <br>
+    <a href="/list">View Employee List</a>
+</body>
+</html>
