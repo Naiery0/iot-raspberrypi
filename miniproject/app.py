@@ -6,15 +6,15 @@ app = Flask(__name__)
 
 # RGB LED 핀 번호 설정
 LED_PINS = {
-    'red': 17,
-    'green': 27,
-    'blue': 22
+    'red': 14,
+    'green': 18,
+    'blue': 15
 }
 
 GPIO.setmode(GPIO.BCM)
 for pin in LED_PINS.values():
     GPIO.setup(pin, GPIO.OUT)
-    GPIO.output(pin, GPIO.LOW)
+    GPIO.output(pin, GPIO.HIGH)
 
 # DB 설정
 db_config = {
@@ -55,7 +55,7 @@ def login():
 
 @app.route('/control')
 def control():
-    led_states = {color: 'ON' if GPIO.input(pin) else 'OFF' for color, pin in LED_PINS.items()}
+    led_states = {color: 'OFF' if GPIO.input(pin) else 'ON' for color, pin in LED_PINS.items()}
     return render_template('control.html', led_states=led_states)
 
 @app.route('/led', methods=['POST'])
@@ -66,9 +66,9 @@ def led():
     if color in LED_PINS:
         pin = LED_PINS[color]
         if action == 'on':
-            GPIO.output(pin, GPIO.HIGH)
-        elif action == 'off':
             GPIO.output(pin, GPIO.LOW)
+        elif action == 'off':
+            GPIO.output(pin, GPIO.HIGH)
 
     return redirect(url_for('control'))
 
@@ -78,4 +78,4 @@ def cleanup():
     return "GPIO cleanup 완료"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=False)
