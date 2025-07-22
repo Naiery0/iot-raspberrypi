@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>RGB LED 제어</title>
+</head>
+<body>
+    <h2>RGB LED 제어 패널</h2>
+
+    {% for color in ['red', 'green', 'blue'] %}
+        <h3 style="color:{{ color }}">LED {{ color|capitalize }} - 상태: {{ led_states[color] }}</h3>
+        <form method="post" action="/led" style="margin-bottom:10px;">
+            <input type="hidden" name="color" value="{{ color }}">
+            <button type="submit" name="action" value="on">ON</button>
+            <button type="submit" name="action" value="off">OFF</button>
+        </form>
+    {% endfor %}
+</body>
+</html>
